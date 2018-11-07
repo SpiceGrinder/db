@@ -55,7 +55,7 @@ def retrieveTuple(cursor, tableName, attribute, field):
 	# ',' is needed to limit binding to 1
 	field = (field,)
 	#execute query
-	cursor.execute('SELECT * FROM Recipe WHERE '+attribute+'=?', field)
+	cursor.execute('SELECT * FROM '+tableName+' WHERE '+attribute+'=?', field)
 	return cursor.fetchone()
 	
 
@@ -121,15 +121,15 @@ def insertNewSpice(cursor, name, gpt, available):
 						+available+' )'
 				  )
 
-#name is the name of the spice
-#gpt is grams per tsp
-#available is if the spice is attached to the machine
-def deleteSpice(cursor, name, gpt, available):
+#retrieve 1 row from a tables
+#cursor is the database cursor class where the connection is established
+#tableName is the name of the table
+#attribute is the table column name
+#field is the the specific attribute you want to retrieve 
+def deleteTuple(cursor, tableName, attribute, field):
+	# ',' is needed to limit binding to 1
+	field = (field,)
+	#execute query
+	cursor.execute('DELETE FROM '+tableName+' WHERE '+attribute+'=?', field)
 	
-	cursor.execute(	"INSERT INTO Spice VALUES ("
-						+'\''+name+'\', '
-						+gpt+', '
-						+available+' )'
-				  )
-
 	

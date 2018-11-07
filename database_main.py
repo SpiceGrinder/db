@@ -25,8 +25,8 @@ c.execute('''CREATE TABLE Spice
             (
              	Name text NOT NULL DEFAULT '', 
              	GramsPerTsp real,
-             	Available BIT, 
-             	PRIMARY KEY (`Name`)
+             	Available BIT DEFAULT 0, 
+             	PRIMARY KEY (Name)
          	
          	)'''
          )
@@ -52,31 +52,31 @@ c.execute('''	CREATE TABLE Recipe
 	             	amount5 real,
 	             	amount6 real,
 	             	amount7 real DEFAULT NULL, 
-	             	PRIMARY KEY (`Name`),
+	             	PRIMARY KEY (Name),
 					
-					CONSTRAINT `realspice_1` 
-					FOREIGN KEY (`Ingredient1`) 
-					REFERENCES `Spice` (`Name`),
+					CONSTRAINT realspice_1 
+					FOREIGN KEY (Ingredient1) 
+					REFERENCES Spice (Name),
 
-					CONSTRAINT `realspice_2` 
-					FOREIGN KEY (`Ingredient2`) 
-					REFERENCES `Spice` (`Name`),
+					CONSTRAINT realspice_2 
+					FOREIGN KEY (Ingredient2) 
+					REFERENCES Spice (Name),
 
-					CONSTRAINT `realspice_3` 
-					FOREIGN KEY (`Ingredient3`) 
-					REFERENCES `Spice` (`Name`),
+					CONSTRAINT realspice_3 
+					FOREIGN KEY (Ingredient3) 
+					REFERENCES Spice (Name),
 
-					CONSTRAINT `realspice_4` 
-					FOREIGN KEY (`Ingredient4`) 
-					REFERENCES `Spice` (`Name`),
+					CONSTRAINT realspice_4 
+					FOREIGN KEY (Ingredient4) 
+					REFERENCES Spice (Name),
 
-					CONSTRAINT `realspice_5` 
-					FOREIGN KEY (`Ingredient5`) 
-					REFERENCES `Spice` (`Name`),
+					CONSTRAINT realspice_5 
+					FOREIGN KEY (Ingredient5) 
+					REFERENCES Spice (Name),
 
-					CONSTRAINT `realspice_6` 
-					FOREIGN KEY (`Ingredient6`) 
-					REFERENCES `Spice` (`Name`)
+					CONSTRAINT realspice_6 
+					FOREIGN KEY (Ingredient6) 
+					REFERENCES Spice (Name)
 
 				)'''
 		)
@@ -143,6 +143,9 @@ insertNewRecipe(c, 	'Too much Cloves',
 					'NULL')
 
 insertNewSpice(c, 'curry powder',  '6.3', '0')
+
+#in the connection c, delete from the table Recipe where Name is Too much Cloves
+deleteTuple(c, 'Recipe', 'Name', 'Too much Cloves')
 
 # Save (commit) the changes
 conn.commit()

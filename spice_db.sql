@@ -1,46 +1,78 @@
 
 
-
-
-
-
-
+#drop all tables if they exist; clean slate
 DROP TABLE IF EXISTS `Recipe`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Recipe` (
-`Name` varchar(50) NOT NULL DEFAULT '',
-`Ingredient1` varchar(50) DEFAULT NULL,
-`Ingredient2` varchar(50) DEFAULT NULL,
-`Ingredient3` varchar(50) DEFAULT NULL,
-`Ingredient4` varchar(50) DEFAULT NULL,
-`Ingredient5` varchar(50) DEFAULT NULL,
-`Ingredient6` varchar(50) DEFAULT NULL,
-`Ingredient7` varchar(50) DEFAULT NULL,
-`Amount1` float(5) DEFAULT NULL,
-`Amount2` float(5) DEFAULT NULL,
-`Amount3` float(5) DEFAULT NULL,
-`Amount4` float(5) DEFAULT NULL,
-`Amount5` float(5) DEFAULT NULL,
-`Amount6` float(5) DEFAULT NULL,
-`Amount7` float(5) DEFAULT NULL,
-PRIMARY KEY (`Name`),
-CONSTRAINT `flightinstance_ibfk_1` FOREIGN KEY (`Ingredient1`) REFERENCES `Spices` (`Name`),
-CONSTRAINT `flightinstance_ibfk_2` FOREIGN KEY (`Ingredient2`) REFERENCES `Spices` (`Name`),
-CONSTRAINT `flightinstance_ibfk_3` FOREIGN KEY (`Ingredient3`) REFERENCES `Spices` (`Name`),
-CONSTRAINT `flightinstance_ibfk_4` FOREIGN KEY (`Ingredient4`) REFERENCES `Spices` (`Name`),
-CONSTRAINT `flightinstance_ibfk_5` FOREIGN KEY (`Ingredient5`) REFERENCES `Spices` (`Name`),
-CONSTRAINT `flightinstance_ibfk_6` FOREIGN KEY (`Ingredient6`) REFERENCES `Spices` (`Name`),
-CONSTRAINT `flightinstance_ibfk_7` FOREIGN KEY (`Ingredient7`) REFERENCES `Spices` (`Name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `Spice`;
+
+#create the tables
+
+CREATE TABLE Spice
+            (
+             	Name text NOT NULL DEFAULT '', 
+             	GramsPerTsp real,
+             	Available BIT DEFAULT 0, 
+             	PRIMARY KEY (Name)
+         	
+         	)
+
+ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-/*
-LOCK TABLES `Recipe` WRITE;
-/*!40000 ALTER TABLE `Recipe` DISABLE KEYS ;
-INSERT INTO `Recipe` VALUES 
-('Curr','Baltimore','MD'),
-('SFO','San Francisco','CA');
-/*!40000 ALTER TABLE `Recipe` ENABLE KEYS ;
+CREATE TABLE Recipe
+             	(
+	             	name text NOT NULL DEFAULT '', 
+	             	Ingredient1 text,
+	             	Ingredient2 text,
+	             	Ingredient3 text,
+	             	Ingredient4 text,
+	             	Ingredient5 text,
+	             	Ingredient6 text,
+	             	Ingredient7 text DEFAULT NULL, 
+	             	amount1 real,
+	             	amount2 real,
+	             	amount3 real,
+	             	amount4 real,
+	             	amount5 real,
+	             	amount6 real,
+	             	amount7 real DEFAULT NULL, 
+	             	PRIMARY KEY (Name),
+					
+					CONSTRAINT realspice_1 
+					FOREIGN KEY (Ingredient1) 
+					REFERENCES Spice (Name),
+
+					CONSTRAINT realspice_2 
+					FOREIGN KEY (Ingredient2) 
+					REFERENCES Spice (Name),
+
+					CONSTRAINT realspice_3 
+					FOREIGN KEY (Ingredient3) 
+					REFERENCES Spice (Name),
+
+					CONSTRAINT realspice_4 
+					FOREIGN KEY (Ingredient4) 
+					REFERENCES Spice (Name),
+
+					CONSTRAINT realspice_5 
+					FOREIGN KEY (Ingredient5) 
+					REFERENCES Spice (Name),
+
+					CONSTRAINT realspice_6 
+					FOREIGN KEY (Ingredient6) 
+					REFERENCES Spice (Name)
+
+				) 
+
+ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+#example insertion
+
+LOCK TABLES Spice WRITE;
+
+INSERT INTO Spice VALUES 
+('Pepper', 6.4, 1),
+('Salt', 5.69, 1);
+
 UNLOCK TABLES;
-*/
