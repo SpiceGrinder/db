@@ -1,6 +1,7 @@
 
 import sqlite3
 
+
 #print functions
 #----------------------------------------------------------------------------------------
 
@@ -46,6 +47,9 @@ def printTuple(cursor, tableName, attribute, field):
 #----------------------------------------------------------------------------------------
 
 
+#SQL functions
+#----------------------------------------------------------------------------------------
+
 #retrieve 1 row from a tables
 #cursor is the database cursor class where the connection is established
 #tableName is the name of the table
@@ -58,7 +62,11 @@ def retrieveTuple(cursor, tableName, attribute, field):
 	cursor.execute('SELECT * FROM '+tableName+' WHERE '+attribute+'=?', field)
 	return cursor.fetchone()
 	
-
+#adds a new row to the table Recipe
+#cursor is the database cursor class where the connection is established
+#name is the name of the Recipe
+#ingredient 1-7 are ingredients used in recipe
+#amount 1-7 are the amount (in teaspoon) 
 def insertNewRecipe(cursor, name, ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6, ingredient7, amount1, amount2, amount3, amount4, amount5, amount6, amount7):
 	#add ' ' to all strings that aren't NULL
 	if ingredient1 != 'NULL':
@@ -110,16 +118,20 @@ def insertNewRecipe(cursor, name, ingredient1, ingredient2, ingredient3, ingredi
 						+amount7+' )'
 				  )
 
+#add a new row to the table Spice
 #name is the name of the spice
 #gpt is grams per tsp
 #available is if the spice is attached to the machine
 def insertNewSpice(cursor, name, gpt, available):
-	
+	#sqlite doesn't have manual locking mechanism
+	#see create transaction if explicit locking is neccessary
+	#cursor.execute('LOCK TABLES Spice WRITE;')
 	cursor.execute(	"INSERT INTO Spice VALUES ("
 						+'\''+name+'\', '
 						+gpt+', '
 						+available+' )'
 				  )
+	#cursor.execute('UNLOCK TABLES;')
 
 #retrieve 1 row from a tables
 #cursor is the database cursor class where the connection is established
@@ -131,5 +143,51 @@ def deleteTuple(cursor, tableName, attribute, field):
 	field = (field,)
 	#execute query
 	cursor.execute('DELETE FROM '+tableName+' WHERE '+attribute+'=?', field)
-	
-	
+
+#----------------------------------------------------------------------------------------
+
+
+#Conversion functions
+#----------------------------------------------------------------------------------------
+
+#convert ounce to grams
+def OunceToGram(ounce):
+	return ounce*28.8495
+
+#convert grams to ounce
+def GramToOunce(gram):
+	return gram/28.8495
+
+#convert Kg to grams
+def KgToGram(kilogram):
+	return kilogram*1000
+
+#convert grams to Kg
+def GramToKg(gram):
+	return gram/1000
+
+#convert pounds to grams
+def PoundToGram(Pound):
+	return Pound*453.592
+
+#convert grams to pounds
+def PoundGramTo(gram):
+	return gram/453.592
+
+#convert tsp to cup
+def TspToCup(tsp):
+	return Tsp/48
+
+def CupToTsp(Cup):
+	return Cup*48
+
+def GramToTsp(cursor, gram, name):
+	row = retrieveTuple(cursor, 'Spice', 'Name', name)
+	GramsPerTsp = row[1]
+	return gram/GramsPerTsp
+
+def TspToGram(cursor, tsp, name):
+	row = retrieveTuple(cursor, 'Spice', 'Name', name)
+	GramsPerTsp = row[1]
+	return GramsPerTsp*tsp
+#----------------------------------------------------------------------------------------	

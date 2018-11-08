@@ -6,6 +6,7 @@
 
 import sqlite3
 
+
 #get functions from database_func.py in same directory
 from database_func import *
 
@@ -31,8 +32,6 @@ c.execute('''CREATE TABLE Spice
          	)'''
          )
 
-
-# Create table
 #amount is in tsp
 #to get grams, mult. time GramsPerTsp in Table Spice
 c.execute('''	CREATE TABLE Recipe
@@ -103,9 +102,11 @@ spices = [
 		 ]
 
 #the ? are how many fields in each value not how many elements in the list
+#example: the table `Spice` has 3 attributes so 3 ?
 c.executemany('INSERT INTO Spice VALUES (?, ?, ?)', spices)
 
-
+#add 1st recipe using SQLite syntax 
+#this method takes 1 arg 
 c.execute('''	INSERT INTO Recipe 
 				VALUES 	(	'The Monstrosity', 
 							'Pepper',
@@ -126,6 +127,9 @@ c.execute('''	INSERT INTO Recipe
 
 		''')
 
+#add 2nd recipe using function from database_func
+#takes multiple arguments
+#this method is easier for variables (specifically user input)
 insertNewRecipe(c, 	'Too much Cloves', 
 					'Cloves',  
 					'Cloves', 
@@ -142,6 +146,7 @@ insertNewRecipe(c, 	'Too much Cloves',
 					'NULL', 
 					'NULL')
 
+#add a new individual spice using a function from database_func
 insertNewSpice(c, 'curry powder',  '6.3', '0')
 
 #in the connection c, delete from the table Recipe where Name is Too much Cloves
@@ -150,11 +155,21 @@ deleteTuple(c, 'Recipe', 'Name', 'Too much Cloves')
 # Save (commit) the changes
 conn.commit()
 
+#all print functions are from database_func.py
 printSortedTable(c, 'Spice', 'Available')
 printTable(c, 'Spice')
 printTuple(c, 'Recipe', 'Name', 'The Monstrosity')
 printTable(c, 'Recipe')
 print(retrieveTuple(c, 'Recipe', 'Name', 'The Monstrosity'))
+
+print('')
+print('5 tsp of Pepper is '),
+print(TspToGram(c, 5 ,'Pepper')),
+print(" grams")
+
+print('81 grams of salt is '),
+print(GramToTsp(c, 81 ,'Salt')),
+print(" tsp")
 
 #program termination indicator
 print("")
