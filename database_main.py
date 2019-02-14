@@ -7,8 +7,8 @@
 import sqlite3
 
 
-#get functions from database_func.py in same directory
-from database_func import *
+#these python files in same directory
+from database_header import *
 
 #make a connection
 conn = sqlite3.connect('BurrGrinder.db')
@@ -18,67 +18,12 @@ c = conn.cursor()
 
 #house cleaning
 #delete table if it already exist
-c.execute("DROP TABLE IF EXISTS `Recipe`;")
-c.execute("DROP TABLE IF EXISTS `Spice`;")
+c.execute(deleteRecipeTable)
+c.execute(deleteSpiceTable)
 
 #create tables
-c.execute('''CREATE TABLE Spice
-            (
-             	Name text NOT NULL DEFAULT '', 
-             	GramsPerTsp real,
-             	Available BIT DEFAULT 0, 
-             	PRIMARY KEY (Name)
-         	
-         	)'''
-         )
-
-#amount is in tsp
-#to get grams, mult. time GramsPerTsp in Table Spice
-c.execute('''	CREATE TABLE Recipe
-             	(
-	             	name text NOT NULL DEFAULT '', 
-	             	Ingredient1 text,
-	             	Ingredient2 text,
-	             	Ingredient3 text,
-	             	Ingredient4 text,
-	             	Ingredient5 text,
-	             	Ingredient6 text,
-	             	Ingredient7 text DEFAULT NULL, 
-	             	amount1 real,
-	             	amount2 real,
-	             	amount3 real,
-	             	amount4 real,
-	             	amount5 real,
-	             	amount6 real,
-	             	amount7 real DEFAULT NULL, 
-	             	PRIMARY KEY (Name),
-					
-					CONSTRAINT realspice_1 
-					FOREIGN KEY (Ingredient1) 
-					REFERENCES Spice (Name),
-
-					CONSTRAINT realspice_2 
-					FOREIGN KEY (Ingredient2) 
-					REFERENCES Spice (Name),
-
-					CONSTRAINT realspice_3 
-					FOREIGN KEY (Ingredient3) 
-					REFERENCES Spice (Name),
-
-					CONSTRAINT realspice_4 
-					FOREIGN KEY (Ingredient4) 
-					REFERENCES Spice (Name),
-
-					CONSTRAINT realspice_5 
-					FOREIGN KEY (Ingredient5) 
-					REFERENCES Spice (Name),
-
-					CONSTRAINT realspice_6 
-					FOREIGN KEY (Ingredient6) 
-					REFERENCES Spice (Name)
-
-				)'''
-		)
+c.execute(createSpiceTable)
+c.execute(createRecipeTable)
 
 # Insert rows of data 1 by 1
 
@@ -160,20 +105,12 @@ printSortedTable(c, 'Spice', 'Available')
 printTable(c, 'Spice')
 printTuple(c, 'Recipe', 'Name', 'The Monstrosity')
 printTable(c, 'Recipe')
-print(retrieveTuple(c, 'Recipe', 'Name', 'The Monstrosity'))
-
-print('')
-print('5 tsp of Pepper is '),
-print(TspToGram(c, 5 ,'Pepper')),
-print(" grams")
-
-print('81 grams of salt is '),
-print(GramToTsp(c, 81 ,'Salt')),
-print(" tsp")
+print(retrieveTuple(c, 'Recipe', 'Name', 'The Monstrosity'), '\n')
+print('5 tsp of Pepper is', TspToGram(c, 5 ,'Pepper'), 'grams')
+print('81 grams of salt is', GramToTsp(c, 81 ,'Salt'), 'tsp')
 
 #program termination indicator
-print("")
-print("program ran sucessfully")
+print("\nprogram ran sucessfully")
 
 # Close the connection when done
 # Be sure any changes have been committed or they will be lost

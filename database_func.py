@@ -12,7 +12,7 @@ import sqlite3
 def printSortedTable(cursor, tableName, sortBy):
 	print(tableName+' sorted by '+ sortBy+":")
 	for row in cursor.execute('SELECT * FROM ' + tableName + ' ORDER BY '+ sortBy):
-		print row
+		print (row)
 	print("")
 
 #print all inputs from a table
@@ -21,7 +21,7 @@ def printSortedTable(cursor, tableName, sortBy):
 def printTable(cursor, tableName):
 	print(tableName + ":")
 	for row in cursor.execute('SELECT * FROM ' + tableName):
-		print row
+		print (row)
 	print("")
 
 #print 1 row from a tables
@@ -39,11 +39,10 @@ def printTuple(cursor, tableName, attribute, field):
 	
 	#the for loop is to print the tuple w/o type signifier 
 	#the | is to separate attributes 
-	print('|'),
+	print('|', end = '')
 	for element in cursor.fetchone():
-		print(element),
-		print('|'), 
-	print("\n")
+		print(element, '|', end = '')
+	print('\n')
 #----------------------------------------------------------------------------------------
 
 
@@ -145,49 +144,3 @@ def deleteTuple(cursor, tableName, attribute, field):
 	cursor.execute('DELETE FROM '+tableName+' WHERE '+attribute+'=?', field)
 
 #----------------------------------------------------------------------------------------
-
-
-#Conversion functions
-#----------------------------------------------------------------------------------------
-
-#convert ounce to grams
-def OunceToGram(ounce):
-	return ounce*28.8495
-
-#convert grams to ounce
-def GramToOunce(gram):
-	return gram/28.8495
-
-#convert Kg to grams
-def KgToGram(kilogram):
-	return kilogram*1000
-
-#convert grams to Kg
-def GramToKg(gram):
-	return gram/1000
-
-#convert pounds to grams
-def PoundToGram(Pound):
-	return Pound*453.592
-
-#convert grams to pounds
-def PoundGramTo(gram):
-	return gram/453.592
-
-#convert tsp to cup
-def TspToCup(tsp):
-	return Tsp/48
-
-def CupToTsp(Cup):
-	return Cup*48
-
-def GramToTsp(cursor, gram, name):
-	row = retrieveTuple(cursor, 'Spice', 'Name', name)
-	GramsPerTsp = row[1]
-	return gram/GramsPerTsp
-
-def TspToGram(cursor, tsp, name):
-	row = retrieveTuple(cursor, 'Spice', 'Name', name)
-	GramsPerTsp = row[1]
-	return GramsPerTsp*tsp
-#----------------------------------------------------------------------------------------	
