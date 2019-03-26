@@ -19,6 +19,7 @@ c = conn.cursor()
 #house cleaning
 #delete table if it already exist
 #note that deleteRecipeTable and deleteSpice Table are plain sql code in text form 
+
 c.execute(deleteRecipeTable)
 c.execute(deleteSpiceTable)
 
@@ -49,11 +50,25 @@ spices = [
 
 #the ? are how many fields in each value not how many elements in the list
 #example: the table `Spice` has 3 attributes so 3 ?
-c.executemany('INSERT INTO Spice VALUES (?, ?, ?)', spices)
+c.executemany('INSERT INTO Spice(name, grams_per_tsp, available) VALUES (?, ?, ?)', spices)
 
 #add 1st recipe using SQLite syntax 
 #this method takes 1 arg 
-c.execute('''	INSERT INTO Recipe 
+c.execute('''	INSERT INTO Recipe (name, 
+									ingredient1, 
+									ingredient2, 
+									ingredient3, 
+									ingredient4, 
+									ingredient5, 
+									ingredient6, 
+									ingredient7, 
+									amount1, 
+									amount2, 
+									amount3, 
+									amount4, 
+									amount5, 
+									amount6, 
+									amount7)
 				VALUES 	(	'The Monstrosity', 
 							'Pepper',
 							'Salt',

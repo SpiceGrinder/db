@@ -13,24 +13,25 @@ deleteSpiceTable	 = 	'DROP TABLE IF EXISTS `Spice`;'
 #create tables
 createSpiceTable = '''CREATE TABLE Spice
 			            (
-			             	Name text NOT NULL DEFAULT '', 
-			             	GramsPerTsp real,
-			             	Available BIT DEFAULT 0, 
-			             	PRIMARY KEY (Name)
-			         	
+			            	id INTEGER PRIMARY KEY AUTOINCREMENT,
+			             	name text NOT NULL DEFAULT '', 
+			             	grams_per_tsp real,
+			             	available BIT DEFAULT 0 	
+			
 			         	)
 			       '''
 
 createRecipeTable = '''	CREATE TABLE Recipe
 		             	(
+		             		id INTEGER PRIMARY KEY AUTOINCREMENT,
 			             	name text NOT NULL DEFAULT '', 
-			             	Ingredient1 text,
-			             	Ingredient2 text,
-			             	Ingredient3 text,
-			             	Ingredient4 text,
-			             	Ingredient5 text,
-			             	Ingredient6 text,
-			             	Ingredient7 text DEFAULT NULL, 
+			             	ingredient1 text,
+			             	ingredient2 text,
+			             	ingredient3 text,
+			             	ingredient4 text,
+			             	ingredient5 text,
+			             	ingredient6 text,
+			             	ingredient7 text DEFAULT NULL, 
 			             	amount1 real,
 			             	amount2 real,
 			             	amount3 real,
@@ -38,31 +39,30 @@ createRecipeTable = '''	CREATE TABLE Recipe
 			             	amount5 real,
 			             	amount6 real,
 			             	amount7 real DEFAULT NULL, 
-			             	PRIMARY KEY (Name),
 							
 							CONSTRAINT realspice_1 
-							FOREIGN KEY (Ingredient1) 
-							REFERENCES Spice (Name),
+							FOREIGN KEY (ingredient1) 
+							REFERENCES Spice (name),
 
 							CONSTRAINT realspice_2 
-							FOREIGN KEY (Ingredient2) 
-							REFERENCES Spice (Name),
+							FOREIGN KEY (ingredient2) 
+							REFERENCES Spice (name),
 
 							CONSTRAINT realspice_3 
-							FOREIGN KEY (Ingredient3) 
-							REFERENCES Spice (Name),
+							FOREIGN KEY (ingredient3) 
+							REFERENCES Spice (name),
 
 							CONSTRAINT realspice_4 
-							FOREIGN KEY (Ingredient4) 
-							REFERENCES Spice (Name),
+							FOREIGN KEY (ingredient4) 
+							REFERENCES Spice (name),
 
 							CONSTRAINT realspice_5 
-							FOREIGN KEY (Ingredient5) 
-							REFERENCES Spice (Name),
+							FOREIGN KEY (ingredient5) 
+							REFERENCES Spice (name),
 
 							CONSTRAINT realspice_6 
-							FOREIGN KEY (Ingredient6) 
-							REFERENCES Spice (Name)
+							FOREIGN KEY (ingredient6) 
+							REFERENCES Spice (name)
 
 						)
 					'''

@@ -37,11 +37,11 @@ def CupToTsp(Cup):
 
 def GramToTsp(cursor, gram, name):
 	row = retrieveTuple(cursor, 'Spice', 'Name', name)
-	GramsPerTsp = row[1]
+	GramsPerTsp = row[2]
 	return gram/GramsPerTsp
 
 def TspToGram(cursor, tsp, name):
 	row = retrieveTuple(cursor, 'Spice', 'Name', name)
-	GramsPerTsp = row[1]
+	GramsPerTsp = row[2]
 	return GramsPerTsp*tsp
 #----------------------------------------------------------------------------------------	

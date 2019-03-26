@@ -99,7 +99,23 @@ def insertNewRecipe(cursor, name, ingredient1, ingredient2, ingredient3, ingredi
 	#name cannot be NULL
 	name = '\''+name+'\''
 
-	cursor.execute(	'INSERT INTO Recipe VALUES ('
+	cursor.execute(	'''INSERT INTO Recipe 
+					(	name, 
+						ingredient1, 
+						ingredient2, 
+						ingredient3, 
+						ingredient4, 
+						ingredient5, 
+						ingredient6, 
+						ingredient7, 
+						amount1, 
+						amount2, 
+						amount3, 
+						amount4, 
+						amount5, 
+						amount6, 
+						amount7) 
+						VALUES ('''
 						+name+', ' 
 						+ingredient1+', '
 						+ingredient2+', '
@@ -125,7 +141,7 @@ def insertNewSpice(cursor, name, gpt, available):
 	#sqlite doesn't have manual locking mechanism
 	#see create transaction if explicit locking is neccessary
 	#cursor.execute('LOCK TABLES Spice WRITE;')
-	cursor.execute(	"INSERT INTO Spice VALUES ("
+	cursor.execute(	"INSERT INTO Spice(name, grams_per_tsp, available) VALUES ("
 						+'\''+name+'\', '
 						+gpt+', '
 						+available+' )'
