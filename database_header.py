@@ -10,6 +10,7 @@ from conversion_func import *
 deleteRecipeTable = 	'DROP TABLE IF EXISTS `Recipe`;' 
 deleteSpiceTable	 = 	'DROP TABLE IF EXISTS `Spice`;'
 
+#create tables
 createSpiceTable = '''CREATE TABLE Spice
 			            (
 			             	Name text NOT NULL DEFAULT '', 

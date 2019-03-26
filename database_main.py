@@ -18,6 +18,7 @@ c = conn.cursor()
 
 #house cleaning
 #delete table if it already exist
+#note that deleteRecipeTable and deleteSpice Table are plain sql code in text form 
 c.execute(deleteRecipeTable)
 c.execute(deleteSpiceTable)
 
