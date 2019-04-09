@@ -53,7 +53,7 @@ spices = [
 c.executemany('INSERT INTO Spice(name, grams_per_tsp, available) VALUES (?, ?, ?)', spices)
 
 #add 1st recipe using SQLite syntax 
-#this method takes 1 arg 
+#this method takes 1 arg and uses SQL code
 c.execute('''	INSERT INTO Recipe (name, 
 									ingredient1, 
 									ingredient2, 
@@ -112,6 +112,28 @@ insertNewSpice(c, 'curry powder',  '6.3', '0')
 
 #in the connection c, delete from the table Recipe where Name is Too much Cloves
 deleteTuple(c, 'Recipe', 'Name', 'Too much Cloves')
+
+
+#actual data
+#453 grams per ounces to grams per teaspoon
+insertNewSpice(c, 'Columbian bean', str(453.0/(16.0*6.0)), '1')
+insertNewRecipe(c, 	'Simple Columbian Coffee', 
+					'Columbian bean',  
+					'NULL', 
+					'NULL', 
+					'NULL', 
+					'NULL', 
+					'NULL', 
+					'NULL', 
+					'5', 
+					'NULL', 
+					'NULL', 
+					'NULL', 
+					'NULL', 
+					'NULL', 
+					'NULL')
+
+
 
 # Save (commit) the changes
 conn.commit()
