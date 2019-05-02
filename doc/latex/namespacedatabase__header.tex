@@ -1,0 +1,40 @@
+\hypertarget{namespacedatabase__header}{}\section{database\+\_\+header Namespace Reference}
+\label{namespacedatabase__header}\index{database\+\_\+header@{database\+\_\+header}}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{namespacedatabase__header_aa86f8403cffc6b4443b9a220eb1192c7}{delete\+Recipe\+Table} = \textquotesingle{}D\+R\+OP T\+A\+B\+LE IF E\+X\+I\+S\+TS `Recipe`;\textquotesingle{}
+\item 
+string \hyperlink{namespacedatabase__header_a2f8921645ad6be4726eb88f353a6f992}{delete\+Spice\+Table} = \textquotesingle{}D\+R\+OP T\+A\+B\+LE IF E\+X\+I\+S\+TS `Spice`;\textquotesingle{}
+\item 
+string \hyperlink{namespacedatabase__header_a1e3043bca03600416421e49e7abceddf}{create\+Spice\+Table}
+\item 
+string \hyperlink{namespacedatabase__header_af418d39c0c50717e7a56ead5927395ff}{create\+Recipe\+Table}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\index{database\+\_\+header@{database\+\_\+header}!create\+Recipe\+Table@{create\+Recipe\+Table}}
+\index{create\+Recipe\+Table@{create\+Recipe\+Table}!database\+\_\+header@{database\+\_\+header}}
+\subsubsection[{\texorpdfstring{create\+Recipe\+Table}{createRecipeTable}}]{\setlength{\rightskip}{0pt plus 5cm}string database\+\_\+header.\+create\+Recipe\+Table}\hypertarget{namespacedatabase__header_af418d39c0c50717e7a56ead5927395ff}{}\label{namespacedatabase__header_af418d39c0c50717e7a56ead5927395ff}
+\index{database\+\_\+header@{database\+\_\+header}!create\+Spice\+Table@{create\+Spice\+Table}}
+\index{create\+Spice\+Table@{create\+Spice\+Table}!database\+\_\+header@{database\+\_\+header}}
+\subsubsection[{\texorpdfstring{create\+Spice\+Table}{createSpiceTable}}]{\setlength{\rightskip}{0pt plus 5cm}string database\+\_\+header.\+create\+Spice\+Table}\hypertarget{namespacedatabase__header_a1e3043bca03600416421e49e7abceddf}{}\label{namespacedatabase__header_a1e3043bca03600416421e49e7abceddf}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = \textcolor{stringliteral}{'''CREATE TABLE Spice}
+2 \textcolor{stringliteral}{                        (}
+3 \textcolor{stringliteral}{                            id INTEGER PRIMARY KEY AUTOINCREMENT,}
+4 \textcolor{stringliteral}{                            name text NOT NULL DEFAULT '', }
+5 \textcolor{stringliteral}{                            grams\_per\_tsp real,}
+6 \textcolor{stringliteral}{                            available BIT DEFAULT 0     }
+7 \textcolor{stringliteral}{            }
+8 \textcolor{stringliteral}{                        )}
+9 \textcolor{stringliteral}{                   '''}
+\end{DoxyCode}
+\index{database\+\_\+header@{database\+\_\+header}!delete\+Recipe\+Table@{delete\+Recipe\+Table}}
+\index{delete\+Recipe\+Table@{delete\+Recipe\+Table}!database\+\_\+header@{database\+\_\+header}}
+\subsubsection[{\texorpdfstring{delete\+Recipe\+Table}{deleteRecipeTable}}]{\setlength{\rightskip}{0pt plus 5cm}string database\+\_\+header.\+delete\+Recipe\+Table = \textquotesingle{}D\+R\+OP T\+A\+B\+LE IF E\+X\+I\+S\+TS `Recipe`;\textquotesingle{}}\hypertarget{namespacedatabase__header_aa86f8403cffc6b4443b9a220eb1192c7}{}\label{namespacedatabase__header_aa86f8403cffc6b4443b9a220eb1192c7}
+\index{database\+\_\+header@{database\+\_\+header}!delete\+Spice\+Table@{delete\+Spice\+Table}}
+\index{delete\+Spice\+Table@{delete\+Spice\+Table}!database\+\_\+header@{database\+\_\+header}}
+\subsubsection[{\texorpdfstring{delete\+Spice\+Table}{deleteSpiceTable}}]{\setlength{\rightskip}{0pt plus 5cm}string database\+\_\+header.\+delete\+Spice\+Table = \textquotesingle{}D\+R\+OP T\+A\+B\+LE IF E\+X\+I\+S\+TS `Spice`;\textquotesingle{}}\hypertarget{namespacedatabase__header_a2f8921645ad6be4726eb88f353a6f992}{}\label{namespacedatabase__header_a2f8921645ad6be4726eb88f353a6f992}
